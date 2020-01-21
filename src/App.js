@@ -14,6 +14,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import { SymbolText } from './components/symbolText.components';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
                   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                   <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                      <Nav.Link href="f1">Function1</Nav.Link>
+                      <Nav.Link href="symboltext">Symbol and Text Formatting</Nav.Link>
                       <Nav.Link href="f2">Function2</Nav.Link>
                     </Nav>
                   </Navbar.Collapse>
@@ -38,7 +39,13 @@ function App() {
           </Container>
         </header>
         <Switch>
-          <Route path="/:id" children = {<Child />} />
+          <Route exact path="/home">
+           <h2>home</h2>
+          </Route>
+          <Route path="/symboltext">
+            <SymbolText />
+          </Route>
+          <Route path="/noe" children = {<Child />} />
         </Switch>
       </div>
     </Router>
