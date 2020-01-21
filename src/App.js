@@ -45,7 +45,6 @@ function App() {
           <Route path="/symboltext">
             <SymbolText />
           </Route>
-          <Route path="/noe" children = {<Child />} />
         </Switch>
       </div>
     </Router>
@@ -53,12 +52,3 @@ function App() {
 }
 
 export default App;
-
-function Child() {
-  let { id } = useParams();
-  return (
-    <div>
-      <h1>ID: {id}</h1>
-    </div>
-  )
-}
