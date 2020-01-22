@@ -25,13 +25,11 @@ export class SymbolText extends React.Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   }
 
   handleClick(event) {
     event.preventDefault();
     const symbol = this.state.symbol;
-    console.log(this.state.symbol);
     const repeatCount = this.state.repeatCount;
     let result = symbol.repeat(repeatCount) + this.state.text + symbol.repeat(repeatCount);
     this.setState({ 
@@ -41,13 +39,11 @@ export class SymbolText extends React.Component {
 
   handleCopyToClipboard(event) {
     event.preventDefault();
-    const symbol = this.state.symbol;
-    console.log(this.state.symbol);
-    const repeatCount = this.state.repeatCount;
-    let result = symbol.repeat(repeatCount) + this.state.text + symbol.repeat(repeatCount);
-    this.setState({ 
-      result: result,
-    });
+    let el = document.getElementById("copyresult");
+    console.log(this.state.result);
+    el.select();
+    document.execCommand("copy");
+    alert("Copied the text: " + el.value);
   }
 
   render() {
@@ -90,7 +86,7 @@ export class SymbolText extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col sm={8}>Result: { this.state.result }</Col>
+            <Col sm={8}>Result: <textarea readOnly id="copyresult" value={ this.state.result }/></Col>
             <Col sm={4}><Button variant="outline-primary" onClick={ this.handleCopyToClipboard }>Copy</Button></Col>
           </Row>
         </Container>

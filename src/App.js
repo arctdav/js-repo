@@ -15,6 +15,7 @@ import {
   useParams
 } from "react-router-dom";
 import { SymbolText } from './components/symbolText.components';
+import { TankWar } from './components/tankWar.components';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
                   <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                       <Nav.Link href="symboltext">Symbol and Text Formatting</Nav.Link>
-                      <Nav.Link href="f2">Function2</Nav.Link>
+                      <Nav.Link href="tankwar">Simple Tank War</Nav.Link>
                     </Nav>
                   </Navbar.Collapse>
                 </Navbar>
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/symboltext">
             <SymbolText />
+          </Route>
+          <Route path="/tankwar">
+            <TankWar />
           </Route>
         </Switch>
       </div>
