@@ -8,11 +8,12 @@ const DIRECTION = {
 };
 
 export class Tank {
-  constructor(canvasWidth, canvasHeight, obs, player) {
+  constructor(canvasWidth, canvasHeight, player) {
+    this.type = "Tank";
     this.health = 10;
     this.color = "blue";
     this.player = player;
-    this.obs = obs;
+    this.bullets = [];
 
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
@@ -36,6 +37,7 @@ export class Tank {
   }
 
   draw(ctx) {
+    
     if (this.color === "blue") {
       ctx.fillStyle = "#00BFFF";
     } else {
@@ -107,19 +109,20 @@ export class Tank {
   }
 
   moveFire() {
-    this.obs.push(
+    this.bullets.push(
       new Bullet(
         this.faceDir,
         this.position.x + this.tankBody.height / 2 - 2.5,
         this.position.y + this.tankBody.height / 2 - 2.5,
-        this.player,
-        this.obs
+        this.player
       )
     );
   }
 
-  update(deltaTime) {
+  update(deltaTime, ctx) {
     //this.position.y += this.speed;
     //this.position.y += this.speed;
+    this.bullets.forEach(ob => ob.update(deltaTime));
+    this.bullets.forEach(ob => ob.draw(ctx));
   }
 }

@@ -8,15 +8,17 @@ import { Tank } from './TankWar_src/tank';
 import { InputHandlerP1 } from './TankWar_src/inputP1'
 import { InputHandlerP2 } from './TankWar_src/inputP2'
 
+const CANVAS_HEIGHT = 350;
+const CANVAS_WIDTH = 350;
+
 export class TankWar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      CANVAS_WIDTH: 350,
-      CANVAS_HEIGHT: 350,
+      CANVAS_WIDTH: CANVAS_WIDTH,
+      CANVAS_HEIGHT: CANVAS_HEIGHT,
       objects: [],
     }
-    
   }
 
   // Check if game over, return True/False
@@ -40,14 +42,14 @@ export class TankWar extends React.Component {
       objects: [],
     });
 
-    let tank = new Tank(this.CANVAS_WIDTH, this.CANVAS_HEIGHT, this.state.objects, 1);
+    let tank = new Tank(this.state.CANVAS_WIDTH, this.state.CANVAS_HEIGHT, 1);
     new InputHandlerP1(tank);
 
-    let tank2 = new Tank(this.CANVAS_WIDTH, this.CANVAS_HEIGHT, this.state.objects, 2);
+    let tank2 = new Tank(this.state.CANVAS_WIDTH, this.state.CANVAS_HEIGHT, 2);
     new InputHandlerP2(tank2);
     tank2.player = 2;
     tank2.color = "red";
-    tank2.position.y = this.CANVAS_HEIGHT / 4;
+    tank2.position.y = this.state.CANVAS_HEIGHT / 4;
     tank2.faceDir = "DOWN";
 
     this.state.objects.push(tank);
@@ -64,14 +66,13 @@ export class TankWar extends React.Component {
       let deltaTime = timestamp - lastTime;
       lastTime = timestamp;
 
-
       if (tank.health === 0 || tank2.health === 0) {
         this.gameOver(ctx);
       } else {
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        objects.forEach(ob => ob.update(deltaTime));
+        objects.forEach(ob => ob.update(deltaTime, ctx));
         objects.forEach(ob => ob.draw(ctx));
-        console.log(objects)
+        console.log(objects);
       }
       document.getElementById("p1Health").innerHTML =
         "Player1 Health = " + tank.health;

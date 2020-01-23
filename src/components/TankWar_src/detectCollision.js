@@ -1,8 +1,8 @@
 
-export function detectCollision(bullet, objects) {
+export function detectCollision(bullet, tanks) {
   //console.log("detectCollision called");
-  let p1Tank = objects[0];
-  let p2Tank = objects[1];
+  let p1Tank = tanks[0];
+  let p2Tank = tanks[1];
   if (bullet.player === 1) {
     if (
       bullet.position.x >= p2Tank.position.x &&

@@ -2,8 +2,8 @@ import { detectCollision } from './detectCollision'
 
 
 export class Bullet {
-  constructor(faceDir, x, y, player, obs) {
-    this.obs = obs;
+  constructor(faceDir, x, y, player) {
+    this.type = "Bullet";
     this.player = player;
     this.faceDir = faceDir;
     this.position = {
@@ -22,8 +22,7 @@ export class Bullet {
   }
 
   update(deltaTime) {
-    if (detectCollision(this, this.obs)) {
-    } else if (this.faceDir === "RIGHT") {
+    if (this.faceDir === "RIGHT") {
       this.position.x += this.speed;
     } else if (this.faceDir === "LEFT") {
       this.position.x -= this.speed;
