@@ -56,36 +56,34 @@ export class TankWar extends React.Component {
     this.state.objects.push(tank);
     this.state.objects.push(tank2);
 
-    //this.state.objects.push(new Bullet("UP", 0, 100));
+    requestAnimationFrame(this.gameLoop);
+  }
 
+  gameLoop(timestamp) {
     let lastTime = 0;
     const CANVAS_WIDTH = this.state.CANVAS_WIDTH;
     const CANVAS_HEIGHT = this.state.CANVAS_HEIGHT;
     let objects = this.state.objects;
-    
-    const gameOver = function(ctx) { this.gameOver(ctx); };
-    const handleHit = function() { this.handleHit(); };
+    let tank = this.state.objects[0];
+    let tank2 = this.state.objects[1];
 
-    function gameLoop(timestamp) {
-      let deltaTime = timestamp - lastTime;
-      lastTime = timestamp;
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
 
-      if (tank.health === 0 || tank2.health === 0) {
-        gameOver(ctx);
-      } else {
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        objects.forEach(ob => ob.update(deltaTime, ctx));
-        handleHit();
-        objects.forEach(ob => ob.draw(ctx));
-        console.log(objects);
-      }
-      document.getElementById("p1Health").innerHTML =
-        "Player1 Health = " + tank.health;
-      document.getElementById("p2Health").innerHTML =
-        "Player2 Health = " + tank2.health;
-
-      requestAnimationFrame(gameLoop);
+    if (tank.health === 0 || tank2.health === 0) {
+      this.gameOver(ctx);
+    } else {
+      ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      objects.forEach(ob => ob.update(deltaTime, ctx));
+      this.handleHit();
+      objects.forEach(ob => ob.draw(ctx));
+      console.log(objects);
     }
+    document.getElementById("p1Health").innerHTML =
+      "Player1 Health = " + tank.health;
+    document.getElementById("p2Health").innerHTML =
+      "Player2 Health = " + tank2.health;
+
     requestAnimationFrame(gameLoop);
   }
 
