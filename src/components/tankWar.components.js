@@ -19,6 +19,7 @@ export class TankWar extends React.Component {
       CANVAS_HEIGHT: CANVAS_HEIGHT,
       objects: [],
     }
+    this.handleHit = this.handleHit.bind(this);
   }
 
   // Check if game over, return True/False
@@ -61,16 +62,20 @@ export class TankWar extends React.Component {
     const CANVAS_WIDTH = this.state.CANVAS_WIDTH;
     const CANVAS_HEIGHT = this.state.CANVAS_HEIGHT;
     let objects = this.state.objects;
+    
+    const gameOver = function(ctx) { this.gameOver(ctx); };
+    const handleHit = function() { this.handleHit(); };
 
     function gameLoop(timestamp) {
       let deltaTime = timestamp - lastTime;
       lastTime = timestamp;
 
       if (tank.health === 0 || tank2.health === 0) {
-        this.gameOver(ctx);
+        gameOver(ctx);
       } else {
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         objects.forEach(ob => ob.update(deltaTime, ctx));
+        handleHit();
         objects.forEach(ob => ob.draw(ctx));
         console.log(objects);
       }
@@ -82,7 +87,30 @@ export class TankWar extends React.Component {
       requestAnimationFrame(gameLoop);
     }
     requestAnimationFrame(gameLoop);
-  } 
+  }
+
+  handleHit() {
+    let cpTanks = this.objects;
+    for(let i = 0; i < this.objects.length; i++) {
+      let bullets = this.objects[i].bullets;
+      for(let bulleti = 0; bulleti < bullets.length; bulleti++) {
+        for(let cptanki = 0; cptanki < cpTanks.length; cptanki++) {
+          let bullet = bullets[bulleti];
+          if (
+            bullet.position.x >= cpTanks[cptanki].position.x &&
+            bullet.position.x <= cpTanks[cptanki].position.x + cpTanks[cptanki].tankBody.width &&
+            bullet.position.y >= cpTanks[cptanki].position.y &&
+            bullet.position.y <= cpTanks[cptanki].position.y + cpTanks[cptanki].tankBody.height
+          ) {
+            cpTanks[cptanki].health -= 1;
+            bullets.splice(bulleti, 1);
+            bulleti--;
+            break;
+          }
+        }
+      }
+    }
+  }
 
   render() {
     return (

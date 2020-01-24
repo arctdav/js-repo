@@ -14,7 +14,6 @@ export function detectCollision(bullet, tanks) {
       if (bullet.isVisible) {
         bullet.isVisible = false;
         p2Tank.health--;
-        console.log(p2Tank.health);
         return true;
       }
     }
@@ -29,7 +28,6 @@ export function detectCollision(bullet, tanks) {
       if (bullet.isVisible) {
         bullet.isVisible = false;
         p1Tank.health--;
-        console.log(p1Tank.health);
         return true;
       }
     }
