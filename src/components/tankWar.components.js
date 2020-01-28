@@ -36,11 +36,11 @@ export class TankWar extends React.Component {
   }
 
   handleHit(props) {
-    let cpTanks = props.objects;
+    let cpTanks = props.state.objects;
     console.log(cpTanks);
-    const len = props.objects ? props.objects.length : 0;
+    const len = props.state.objects ? props.state.objects.length : 0;
     for(let i = 0; i < len; i++) {
-      let bullets = props.objects[i].bullets;
+      let bullets = props.state.objects[i].bullets;
       for(let bulleti = 0; bulleti < bullets.length; bulleti++) {
         for(let cptanki = 0; cptanki < cpTanks.length; cptanki++) {
           let bullet = bullets[bulleti];
@@ -79,8 +79,8 @@ export class TankWar extends React.Component {
     tank2.faceDir = "DOWN";
 
     let setState = [];
-    setState.push(tank);
-    setState.push(tank2);
+    this.setState.push(tank);
+    this.setState.push(tank2);
     this.setState({
       objects: setState,
       }
@@ -93,7 +93,7 @@ export class TankWar extends React.Component {
     const CANVAS_WIDTH = this.state.CANVAS_WIDTH;
     const CANVAS_HEIGHT = this.state.CANVAS_HEIGHT;
     let objects = this.state.objects;
-    
+    console.log(objects);
     /*function gameLoop(timestamp) {
       let deltaTime = timestamp - lastTime;
       lastTime = timestamp;
@@ -113,8 +113,7 @@ export class TankWar extends React.Component {
 
       requestAnimationFrame(gameLoop);
     }*/
-    var that = this;
-    console.log(that);
+    
     var gameLoop = (timestamp) => {
       let deltaTime = timestamp - lastTime;
       lastTime = timestamp;
@@ -122,9 +121,9 @@ export class TankWar extends React.Component {
         this.gameOver(ctx);
       } else {
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        console.log(objects);
         objects.forEach(ob => ob.update(deltaTime, ctx));
-        console.log(that);
-        this.handleHit(that);
+        this.handleHit(this);
         objects.forEach(ob => ob.draw(ctx));
       }
       document.getElementById("p1Health").innerHTML =
@@ -136,7 +135,7 @@ export class TankWar extends React.Component {
     };
     
     
-    requestAnimationFrame(gameLoop.bind(this));
+    requestAnimationFrame(gameLoop);
   } 
 
   render() {
