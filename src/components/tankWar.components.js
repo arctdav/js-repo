@@ -78,14 +78,14 @@ export class TankWar extends React.Component {
     tank2.position.y = this.state.CANVAS_HEIGHT / 4;
     tank2.faceDir = "DOWN";
 
-    let setState = [];
-    this.setState.push(tank);
-    this.setState.push(tank2);
+    let newobject = [];
+    newobject.push(tank);
+    newobject.push(tank2);
     this.setState({
-      objects: setState,
+      objects: newobject,
       }
     );
-    console.log(this);
+    console.log(this.state.objects);
     
     //this.state.objects.push(new Bullet("UP", 0, 100));
 
