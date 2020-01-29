@@ -92,8 +92,6 @@ export class TankWar extends React.Component {
     let lastTime = 0;
     const CANVAS_WIDTH = this.state.CANVAS_WIDTH;
     const CANVAS_HEIGHT = this.state.CANVAS_HEIGHT;
-    let objects = this.state.objects;
-    console.log(objects);
     /*function gameLoop(timestamp) {
       let deltaTime = timestamp - lastTime;
       lastTime = timestamp;
@@ -121,10 +119,10 @@ export class TankWar extends React.Component {
         this.gameOver(ctx);
       } else {
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        console.log(objects);
-        objects.forEach(ob => ob.update(deltaTime, ctx));
+        console.log(this.state.objects);
+        this.state.objects.forEach(ob => ob.update(deltaTime, ctx));
         this.handleHit(this);
-        objects.forEach(ob => ob.draw(ctx));
+        this.state.objects.forEach(ob => ob.draw(ctx));
       }
       document.getElementById("p1Health").innerHTML =
         "Player1 Health = " + tank.health;
@@ -158,8 +156,8 @@ export class TankWar extends React.Component {
             width={350}
             height={350}
           ></canvas>
-          <p id="p1Health">Player1 Health = 10</p>
-          <p id="p2Health">Player2 Health = 10</p>
+          <p id="p1Health">Player1 Health = {this.state.objects.length > 0 ? this.state.objects[0].health : 10}</p>
+          <p id="p2Health">Player2 Health = {this.state.objects.length > 0 ? this.state.objects[1].health : 10}</p>
         </body>
       </html>
     );
