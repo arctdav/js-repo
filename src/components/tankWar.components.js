@@ -48,7 +48,8 @@ export class TankWar extends React.Component {
             bullet.position.x >= cpTanks[cptanki].position.x &&
             bullet.position.x <= cpTanks[cptanki].position.x + cpTanks[cptanki].tankBody.width &&
             bullet.position.y >= cpTanks[cptanki].position.y &&
-            bullet.position.y <= cpTanks[cptanki].position.y + cpTanks[cptanki].tankBody.height
+            bullet.position.y <= cpTanks[cptanki].position.y + cpTanks[cptanki].tankBody.height &&
+            bullet.player != cpTanks[cptanki].player
           ) {
             cpTanks[cptanki].health -= 1;
             bullets.splice(bulleti, 1);
