@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button'
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 
 export class SymbolText extends React.Component {
   constructor(props) {

@@ -139,7 +139,7 @@ export class TankWar extends React.Component {
 
   render() {
     return (
-      <html>
+      <div>
         <head>
           <title>Tank War</title>
           <meta charSet="UTF-8" />
@@ -160,7 +160,7 @@ export class TankWar extends React.Component {
           <p id="p1Health">Player1 Health = {this.state.objects.length > 0 ? this.state.objects[0].health : 10}</p>
           <p id="p2Health">Player2 Health = {this.state.objects.length > 0 ? this.state.objects[1].health : 10}</p>
         </body>
-      </html>
+      </div>
     );
   }
 }
